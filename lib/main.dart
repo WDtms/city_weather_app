@@ -20,7 +20,7 @@ void main() {
         Provider(create: (_) => DioClient()),
         Provider(create: (_) => TokenSecureStorage()),
         Provider(create: (ctx) => AmadeusDioClient(tokenSecureStorage: ctx.read<TokenSecureStorage>())),
-        Provider(create: (ctx) => WeatherApiClient(ctx.read<DioClient>().getInstance())),
+        Provider(create: (ctx) => WeatherApiClient(ctx.read<DioClient>().instance)),
         Provider(create: (ctx) => CitiesApiClient(ctx.read<AmadeusDioClient>().instance)),
         Provider(create: (ctx) => WeatherRepository(weatherApiClient: ctx.read<WeatherApiClient>())),
         Provider(create: (ctx) => CitiesRepository(citiesApiClient: ctx.read<CitiesApiClient>())),
