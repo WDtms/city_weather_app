@@ -36,6 +36,10 @@ class CitiesCubit extends Cubit<CitiesState> {
       return;
     }
 
+    if (startsWith.isEmpty) {
+      return emit(CitiesState(startsWith: startsWith, cityList: emptyCityList));
+    }
+
     final curList = List<CityItem>.from(state.cityList);
     curList.removeWhere((city) => !city.title.toLowerCase().startsWith(startsWith.toLowerCase()));
 
