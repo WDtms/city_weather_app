@@ -1,4 +1,4 @@
-import 'package:city_weather_app/cities/client/adapter/cities_adapter.dart';
+import 'package:city_weather_app/cities/adapter/cities_adapter.dart';
 import 'package:city_weather_app/cities/client/cities_api_client.dart';
 import 'package:city_weather_app/cities/client/weather_api_client.dart';
 import 'package:city_weather_app/cities/service/cities_repository.dart';

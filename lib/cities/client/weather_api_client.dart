@@ -5,10 +5,10 @@ import 'package:retrofit/http.dart';
 
 part 'weather_api_client.g.dart';
 
-@RestApi(baseUrl: 'https://api.openweathermap.org/data/2.5/')
+@RestApi(baseUrl: 'https://api.openweathermap.org/data/2.5')
 abstract class WeatherApiClient {
   factory WeatherApiClient(Dio dio) = _WeatherApiClient;
 
-  @GET("/weather")
+  @GET('/weather')
   Future<WeatherResponse> getWeather(@Queries() WeatherRequest weatherRequest);
 }

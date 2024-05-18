@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:city_weather_app/cities/client/adapter/cities_adapter.dart';
+import 'package:city_weather_app/cities/adapter/cities_adapter.dart';
 import 'package:city_weather_app/cities/client/models/city/cities_request.dart';
 import 'package:city_weather_app/cities/state_management/cities_cubit/cities_state.dart';
 import 'package:city_weather_app/cities/state_management/models/city_item.dart';
