@@ -4,5 +4,18 @@ part 'city_item.freezed.dart';
 
 @freezed
 class CityItem with _$CityItem {
-  const factory CityItem({required String title, required double latitude, required double longitude}) = CityItemValue;
+  CityItem._();
+
+  factory CityItem({required String title, required double latitude, required double longitude}) = CityItemValue;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is CityItem &&
+        other.title == title;
+  }
+
+  @override
+  int get hashCode => title.hashCode;
 }

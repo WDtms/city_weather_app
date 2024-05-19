@@ -45,7 +45,7 @@ class CitiesCubit extends Cubit<CitiesState> {
 
     emit(
       CitiesState(
-        startsWith: startsWith ?? '',
+        startsWith: startsWith,
         cityList: curList,
       ),
     );
@@ -80,37 +80,25 @@ class CitiesCubit extends Cubit<CitiesState> {
     }
   }
 
-  void _handleLoadedList(List<CityItem> list) {
+  void _handleLoadedList(List<CityItem> newList) {
     // startsWith could have changed
-    final startsWith = state.startsWith;
-    List<CityItem> filteredOldList = state.cityList
-        .where(
-          (city) => city.title.toLowerCase().startsWith(
-                startsWith.toLowerCase(),
-              ),
-        )
-        .toList();
-    List<CityItem> filteredNewList = list
-        .where(
-          (city) => city.title.toLowerCase().startsWith(
-                startsWith.toLowerCase(),
-              ),
-        )
-        .toList();
+    final startsWith = state.startsWith.toLowerCase();
 
-    final Set<String> newCities = filteredNewList.map((city) => city.title).toSet();
-    List<CityItem> mergedList = filteredOldList.where((city) => newCities.contains(city.title)).toList();
-    final Set<String> addedTitles = mergedList.map((city) => city.title).toSet();
+    final Set<CityItem> newCitySet = Set.from(newList);
+    final listToEmit = List<CityItem>.from(state.cityList);
 
-    for (var city in filteredNewList) {
-      if (!addedTitles.contains(city.title)) {
-        mergedList.add(city);
-        addedTitles.add(city.title);
-      }
-    }
+    listToEmit.retainWhere(
+      (oldCity) => oldCity.title.toLowerCase().startsWith(startsWith) && newCitySet.contains(oldCity),
+    );
 
-    final resultList = mergedList.take(10).toList();
+    listToEmit.addAll(
+      newList.where(
+        (newCity) => newCity.title.toLowerCase().startsWith(startsWith) && !listToEmit.contains(newCity),
+      ),
+    );
 
-    emit(CitiesState(startsWith: state.startsWith, cityList: resultList));
+    final resultList = listToEmit.take(10).toList();
+
+    return emit(CitiesState(startsWith: state.startsWith, cityList: resultList));
   }
 }

@@ -112,9 +112,10 @@ class __$$CityItemValueImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CityItemValueImpl implements CityItemValue {
-  const _$CityItemValueImpl(
-      {required this.title, required this.latitude, required this.longitude});
+class _$CityItemValueImpl extends CityItemValue {
+  _$CityItemValueImpl(
+      {required this.title, required this.latitude, required this.longitude})
+      : super._();
 
   @override
   final String title;
@@ -128,21 +129,6 @@ class _$CityItemValueImpl implements CityItemValue {
     return 'CityItem(title: $title, latitude: $latitude, longitude: $longitude)';
   }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CityItemValueImpl &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.latitude, latitude) ||
-                other.latitude == latitude) &&
-            (identical(other.longitude, longitude) ||
-                other.longitude == longitude));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, title, latitude, longitude);
-
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -150,11 +136,12 @@ class _$CityItemValueImpl implements CityItemValue {
       __$$CityItemValueImplCopyWithImpl<_$CityItemValueImpl>(this, _$identity);
 }
 
-abstract class CityItemValue implements CityItem {
-  const factory CityItemValue(
+abstract class CityItemValue extends CityItem {
+  factory CityItemValue(
       {required final String title,
       required final double latitude,
       required final double longitude}) = _$CityItemValueImpl;
+  CityItemValue._() : super._();
 
   @override
   String get title;
